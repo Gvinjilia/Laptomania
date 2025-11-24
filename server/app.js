@@ -16,7 +16,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://laptomania.vercel.app/',
     credentials: true
 }));
 app.use(helmet()); /* helmet - არის module - რომელსაც ჩვენ გამოვიყენებთ მაშინ როდესაც გვინდა ჩვენი website - ის დაცვა, helmet module - ის დახმარებით headers - ში
