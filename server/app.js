@@ -35,7 +35,7 @@ app.use(express.json());
 app.use('/api/laptops', laptopRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
-// app.use('/laptops/images', express.static(path.join(__dirname, '/uploads/laptops')))
+// app.use('/laptops/images', express.static(path.join(__dirname, '/uploads/laptops')));
 
 app.use(globalErrorHandler);
 
