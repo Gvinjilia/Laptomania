@@ -16,7 +16,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-    origin: process.env.CLIENT,
+    origin: process.env.CLIENT_URL,
     credentials: true
 }));
 app.use(helmet()); /* helmet - არის module - რომელსაც ჩვენ გამოვიყენებთ მაშინ როდესაც გვინდა ჩვენი website - ის დაცვა, helmet module - ის დახმარებით headers - ში
