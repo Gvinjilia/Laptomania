@@ -16,7 +16,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-    origin: process.env.CLIENT_URL,
+    origin: process.env.CLIENT,
     credentials: true
 }));
 app.use(helmet()); /* helmet - არის module - რომელსაც ჩვენ გამოვიყენებთ მაშინ როდესაც გვინდა ჩვენი website - ის დაცვა, helmet module - ის დახმარებით headers - ში
@@ -35,7 +35,7 @@ app.use(express.json());
 app.use('/api/laptops', laptopRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
-// app.use('/laptops/images', express.static(path.join(__dirname, '/uploads/laptops')))
+// app.use('/laptops/images', express.static(path.join(__dirname, '/uploads/laptops')));
 
 app.use(globalErrorHandler);
 
