@@ -9,6 +9,7 @@ const helmet = require('helmet');
 const userRouter = require('./routers/user.router');
 const authRouter = require('./routers/auth.router');
 const rateLimiter = require('express-rate-limit');
+const oauthRouter = require('./routers/oauth.router');
 const mongoSanitize =  require('express-mongo-sanitize');
 
 dotenv.config();
@@ -29,12 +30,20 @@ app.use(rateLimiter({ /* rateLimiter - არის module - რომელი�
 }));
 // app.use(mongoSanitize()); /* mongoSanitize - გვეხმარება NoSQL injection - ისგან თავის არიდებაში, თუ მომხმარებელმა input - ში შემოიტანა ისეთი სიმბოლო რომელიც
 // NoSQL ტიპის მონაცემთა ბაზაში command - აღნიშნავს მაშინ mongoSanitize module - ის გამოყენებით, მსგავსი სიმბოლოები input - ებიდან წაიშლება */
-app.use(cookieParser());
-app.use(express.json());
+
+/* stripe - არის გადახდის პლატფორმა, stripe - ის გამოყენებით შესაძლებელია გადახდა ონლაინ Google pay, paypal, mastercard, visa და ბევრი სხვადასხვა მეთოდით, 
+stripe - ით ჩვენ არ გვიწევს ჩვენივე გადახდის სისტემის შექმნა და ჩაშენება ჩვენს ვებ-გვერდზე რადგან მას ეს თვისება უკვე აქვს
+
+OAUTH - open authorzation, OAUTH - ის დახმარებით ჩვენ მომხმარებელს არ ვთხოვთ რომ შემოიტანოს თავისი მონაცემები, მაგალითად ჩვენ შეგვიძლია გამოვიყენოთ Google - ის 
+OAUTH - ი, როდესაც მომხმარებელი აირჩევს სასურველ account - ს, GOOGLE - ი ვებ-გვერდს მისცემს token - ს რომელიც ადასურებს მომხმარებლის იდენტობას, GOOGLE - ან სხვა
+პლატფორმების OAUTH - ით მომხმარებელს აღარ უწევს თავისი ინფორმაციის შეტანა */
+
+app.use(cookieParser());app.use(express.json());
 
 app.use('/api/laptops', laptopRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
+app.use('/api/oauth', oauthRouter);
 // app.use('/laptops/images', express.static(path.join(__dirname, '/uploads/laptops')));
 
 app.use(globalErrorHandler);

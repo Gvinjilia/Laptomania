@@ -10,6 +10,7 @@ const API_URL = import.meta.env.VITE_API_URL + '/api';
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => { // ვიყენებთ useEffect კაუჭს, რომელიც გაეშვება მხოლოდ ერთხელ რადგან დამოკიდებულებების მასივი არის ცარიელი
@@ -24,6 +25,8 @@ export const AuthProvider = ({ children }) => {
             if(res.ok){ // ვამოწმებთ თუ res პასუხის ობიექტში მოცემული კუთვნილება სახელად ok - ის მნიშვნელობა არის 200 მაშინ ვცვლით setUser - მდგომარეობას
                 setUser(result);
             }
+            
+            setLoading(false);
         };
         
         autoLogin(); // ვიძახებთ autoLogin ფუნქციას
@@ -134,8 +137,12 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    const googleAuth = () => {
+        window.location.href = `${API_URL}/oauth/google`;
+    };
+
     return (
-        <AuthContext.Provider value={{user, signup, login, logout}}>
+        <AuthContext.Provider value={{user, loading, signup, login, logout, googleAuth}}>
             {children}
         </AuthContext.Provider>
     )

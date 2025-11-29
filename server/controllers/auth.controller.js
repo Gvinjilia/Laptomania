@@ -8,12 +8,15 @@ const createSendToken = (user, statusCode, res) => {
 
     const cookieOptions = {
         httpOnly: true, 
-        secure: true,
-        sameSite: 'none',
+        secure: process.env.NODE_ENV === 'prod',
+        sameSite: 'Lax',
         maxAge: process.env.COOKIE_EXPIRES * 24 * 60 * 60 * 1000
-    }
+    };
 
-    res.status(statusCode).cookie('lg', token, cookieOptions).json(user);
+    user.password = undefined;
+
+    res.cookie('lg', token, cookieOptions);
+    res.status(statusCode).json(user);
 };
 
 const signUp = catchAsync(async (req, res, next) => {
@@ -95,13 +98,9 @@ const login = catchAsync(async (req, res, next) => {
 
 const logout = catchAsync(async (req, res) => { // ვქმნით logout ფუნქციას, რომელსაც გადავცემთ req, res ობიექტებს, catchAsync - ს ვიყენებთ ჩვენ იმისათვის, 
     // რომ დავიჭიროთ ასინქრონული error - ები
-    res.clearCookie('lg', {
-        httpOnly: true, 
-        secure: true,
-        sameSite: 'none'
-    }); // res ობიექტს გააჩნია ერთი მეთოდი სახელად clearCookie რომელიც გადაცემული სახელით წაშლის token - ს cookie - ს სექციიდან
+    res.clearCookie('lg'); // res ობიექტს გააჩნია ერთი მეთოდი სახელად clearCookie რომელიც გადაცემული სახელით წაშლის token - ს cookie - ს სექციიდან
 
     res.status(200).send(); // მომხმარებელს ვუბრუნებთ პასუხს statusCode - ით 200
 });
 
-module.exports = { signUp, login, logout, verify };
+module.exports = { signUp, login, logout, verify, createSendToken };

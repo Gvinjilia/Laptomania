@@ -19,6 +19,20 @@ const userShema = new mongoose.Schema({
         lowercase: true
     },
 
+    oauthProvider: {
+        type: String,
+        enum: ['google', 'github', 'facebook', null],
+        default: null
+    },
+
+    oauthId: {
+        type: String
+    },
+    
+    avatar: {
+        type: String
+    },
+
     role: {
         enum: ['user', 'moderator', 'admin'],
         default: 'user',
@@ -27,7 +41,9 @@ const userShema = new mongoose.Schema({
 
     password: {
         type: String,
-        required: [true, 'Password is required'],
+        required: [function(){
+            return !this.oauthId
+        }, 'Password is required'],
         minLength: [6, 'Password must be at least 6 characters'],
         select: false
     },

@@ -7,6 +7,16 @@ import messenger from '../images/messenger.png';
 import call from '../images/phone-call.png';
 import Footer from "../components/UI/Footer";
 
+
+/* useMemo - არის კაუჭი რომელსაც ჩვენ ვიყენებთ მაშინ როდესაც გვაქვს ძვირიანი გამოთვლა, მაგალითად დიდი რიცხვის ფაქტორიალის გაგება, useMemo - კაუჭი გამოიყენება
+ოპტიმიზაციისთვის, იმ შემთხვევაში თუ მომხარებელმა შემოიტანა ისევ ის დიდი რიცხვი რომლის ფაქტორიალიც უკვე გამოთვლილია მაშინ useMemo - ამ რიცხვის ქეშირებულ
+შედეგს დააბრუნებს 
+
+useCallback - არის კაუჭი რომელიც გამოიყენება ოპტიმიზაციისთვის, ჩვენ ამ კაუჭს გამოვიყენებთ მაშინ როდესაც არ გვინდა ხელახლა შეიქმნას ისეთი ფუნქცია
+რომლის ლოგიკაც არ იცვლება, მაგალითად როდესაც გვაქვს კომპონენტი რომლის მდგომარეობაც იცვლება, ის გამოიწვევს მთლიანი კომპონენტის (მასში არსეუბლი შეგთავსის)
+ხელახლა დარენდრებას, შექმნას, ისეთი ფუნქციები რომლის ლოგიკაც არ იცვლება ვიყენებთ useCallback კაუჭს, და ის მხოლოდ მაშინ შეიქმნება ხელახლა როდესაც დამოკიდებულების 
+მასივი შეიცვლება */
+
 const Profile = () => {
     const { user } = useAuth();
 
@@ -39,10 +49,16 @@ const Profile = () => {
             </div>
             <div className="pl-20">
                 <div className="border w-20 h-20 rounded-full flex justify-center items-center">
-                    <p className="text-2xl font-black">{initials.length > 1 ? initials[0][0].toUpperCase() + initials[1][0].toUpperCase() : initials[0][0].toUpperCase()}</p>
+                    {
+                        user.avatar ? (
+                            <img src={user.avatar} className="rounded-full" />
+                        ) : (
+                            <p className="text-2xl font-black">{initials.length > 1 ? initials[0][0].toUpperCase() + initials[1][0].toUpperCase() : initials[0][0].toUpperCase()}</p>
+                        )
+                    }
                 </div>
                 <p className="mb-5 mt-5">SIGNED IN AS: {user.email}</p>
-                <p className="mb-5">ROLE: {user.role}</p>
+                <p className="mb-10">ROLE: {user.role}</p>
             </div>
 
             {(user.role === 'admin' || user.role === 'moderator') && (
