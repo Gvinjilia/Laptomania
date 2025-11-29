@@ -36,8 +36,7 @@ const googleCallback = async (req, res, next) => {
 
         const userInfo = await axios.get(GOOGLE_USERINFO_URL, {
             headers: {
-                Authorization: `Bearer ${access_token}`,
-                "Content-Type": 'application/x-www-form-urlencoded'
+                Authorization: `Bearer ${access_token}`
             }
         });
 
