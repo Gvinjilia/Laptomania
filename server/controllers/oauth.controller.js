@@ -24,16 +24,12 @@ const googleCallback = async (req, res, next) => {
     try {
         const { code } = req.query;
 
-        const params = new URLSearchParams({
+        const tokenResponse = await axios.post(GOOGLE_TOKEN_URL, {
             code,
             client_id: process.env.GOOGLE_CLIENT_ID,
             client_secret: process.env.GOOGLE_CLIENT_SECRET,
             redirect_uri: process.env.GOOGLE_REDIRECT_URI,
             grant_type: 'authorization_code'
-        });
-
-        const tokenResponse = await axios.post(GOOGLE_TOKEN_URL, params.toString(), {
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         });
         
         const { access_token } = tokenResponse.data;
@@ -69,7 +65,7 @@ const googleCallback = async (req, res, next) => {
 
         const cookieOptions = {
             httpOnly: true, 
-            secure: process.env.NODE_ENV === 'production',
+            secure: process.env.NODE_ENV === 'prod',
             sameSite: 'None',
             maxAge: process.env.COOKIE_EXPIRES * 24 * 60 * 60 * 1000
         };
