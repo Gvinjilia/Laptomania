@@ -1,7 +1,9 @@
 import Footer from "../components/UI/Footer";
 import { useAuth } from "../context/AuthContext";
 import { useForm } from "../hooks/useForm";
+
 import google from '../images/search (5).png';
+import github from '../images/github (2).png';
 
 const Login = () => {
     const [formData, handleChange] = useForm({
@@ -9,7 +11,7 @@ const Login = () => {
         password: ''
     });
 
-    const { login, googleAuth } = useAuth();
+    const { login, googleAuth, githubAuth } = useAuth();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -29,7 +31,10 @@ const Login = () => {
                         <button className="text-white p-2 font-medium mb-3" style={{backgroundColor: 'var(--button-color, #7462AB)'}}>Submit</button>
                     </form>
 
-                    <button className="border flex justify-center items-center gap-3 p-2 font-medium w-full" onClick={googleAuth}><img src={google} className="w-5" />Continue with Google</button>
+                    <div className="flex flex-col gap-3">
+                        <button className="flex justify-center items-center gap-3 p-2 font-medium w-full text-white bg-black" onClick={githubAuth}><img src={github} className="w-5" />Continue with Github</button>
+                        <button className="border flex justify-center items-center gap-3 p-2 font-medium w-full" onClick={googleAuth}><img src={google} className="w-5" />Continue with Google</button>
+                    </div>
                 </div>
             </main>
 
