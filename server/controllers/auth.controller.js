@@ -98,25 +98,9 @@ const login = catchAsync(async (req, res, next) => {
 
 const logout = catchAsync(async (req, res) => { // ვქმნით logout ფუნქციას, რომელსაც გადავცემთ req, res ობიექტებს, catchAsync - ს ვიყენებთ ჩვენ იმისათვის, 
     // რომ დავიჭიროთ ასინქრონული error - ები
-    // Clear the cookie using matching options (path/domain/secure/sameSite must match the cookie set)
-    console.log('Logout called; incoming cookies:', req.cookies);
-    const isProd = process.env.NODE_ENV === 'prod';
-    const cookieOptions = { httpOnly: true, secure: isProd, sameSite: 'None', path: '/' };
-
-    // Clear common path variants
-    res.clearCookie('lg', cookieOptions);
-    res.clearCookie('lg', { ...cookieOptions, path: '/api' });
-    res.clearCookie('lg', { ...cookieOptions, path: '/api/auth' });
-
-    // Try clearing domain variants too (if cookie was set with a domain)
-    if (req.hostname) {
-        res.clearCookie('lg', { ...cookieOptions, domain: req.hostname });
-        res.clearCookie('lg', { ...cookieOptions, domain: `.${req.hostname}` });
-    }
-
-    // Fallback: set cookie to empty with expired date to force browser removal
-    res.cookie('lg', '', { ...cookieOptions, expires: new Date(0), maxAge: 0 });
-    console.log('Logout - Set-Cookie header after clear:', res.getHeader('Set-Cookie'));
+    res.clearCookie('lg', {
+        sameSite: 'None'
+    }); // res ობიექტს გააჩნია ერთი მეთოდი სახელად clearCookie რომელიც გადაცემული სახელით წაშლის token - ს cookie - ს სექციიდან
 
     res.status(200).send(); // მომხმარებელს ვუბრუნებთ პასუხს statusCode - ით 200
 });
