@@ -40,10 +40,10 @@ const Nav = () => {
                         </div>
                         <div>
                             <div className={`lg:flex gap-15 md:${menu ? 'block' : 'hidden'} sm:${menu ? 'block' : 'hidden'} ${menu ? 'block' : 'hidden'} pr-8`}>
+                                <li><Link to='/'>Home</Link></li>
                                 {
                                     user ? (
                                         <>
-                                            <li><Link to='/'>Home</Link></li>
                                             <div className="relative lg:block md:hidden sm:hidden hidden">
                                                 <li onClick={() => setIsOpen(true)}>Cart</li>
                                                 {
@@ -54,12 +54,12 @@ const Nav = () => {
                                             </div>
                                             <li><Link to='/profile'>Profile</Link></li>
                                             <li><Link to='/laptops'>Laptops</Link></li>
-                                            <li className="lg:border-none lg:text-start lg:p-0 lg:rounded-none lg:mt-0 md:border md:text-center md:p-1 md:rounded-xs md:mt-2 sm:border sm:text-center sm:p-1 sm:rounded-xs sm:mt-2 mt-2 border text-center p-1 rounded-xs w-full"><Link onClick={logout} to='/login'>Logout</Link></li>
+                                            <li className="lg:border-none lg:text-start lg:p-0 lg:mt-0 md:border md:text-center md:p-1 md:mt-2 sm:border sm:text-center sm:p-1 sm:mt-2 mt-2 border text-center p-1 w-full"><Link onClick={logout} to='/login'>Logout</Link></li>
                                         </>
                                     ) : (
                                         <div className="lg:flex lg:flex-row lg:gap-15 md:flex md:flex-col sm:flex sm:flex-col flex flex-col gap-2">
-                                            <li className="lg:border-none lg:text-start lg:p-0 lg:rounded-none lg:mt-0 md:border md:text-center md:p-1 md:rounded-xs md:mt-2 sm:border sm:text-center sm:p-1 sm:rounded-xs sm:mt-2 border text-center p-1 rounded-xs"><Link to='/signup'>Signup</Link></li>
-                                            <li className="lg:border-none lg:text-start lg:p-0 lg:rounded-none lg:mt-0 md:border md:text-center md:p-1 md:rounded-xs md:mt-2 sm:border sm:text-center sm:p-1 sm:rounded-xs sm:mt-2 border text-center p-1 rounded-xs"><Link to='/login'>Login</Link></li>
+                                            <li className="lg:border-none lg:text-start lg:p-0 lg:mt-0 md:border md:text-center md:p-1 md:mt-2 sm:border sm:text-center sm:p-1 sm:mt-2 border text-center p-1"><Link to='/signup'>Signup</Link></li>
+                                            <li className="lg:border-none lg:text-start lg:p-0 lg:mt-0 md:border md:text-center md:p-1 md:mt-2 sm:border sm:text-center sm:p-1 sm:mt-2 border text-center p-1"><Link to='/login'>Login</Link></li>
                                         </div>
                                     )
                                 }
