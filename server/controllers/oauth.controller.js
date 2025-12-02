@@ -15,7 +15,7 @@ const createSendToken = (user, res) => {
 
     const cookieOptions = {
         httpOnly: true, 
-        secure: process.env.NODE_ENV === 'prod',
+        secure: process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production',
         sameSite: 'None',
         maxAge: process.env.COOKIE_EXPIRES * 24 * 60 * 60 * 1000
     };
@@ -59,11 +59,9 @@ const googleCallback = async (req, res, next) => {
             }
         });
 
-        console.log(userInfo.data);
-
         const { sub, name, picture, email, email_verified } = userInfo.data;
 
-        let user = await User.findOne({oauthId: sub, email});
+        let user = await User.findOne({ email });
 
         if(!user){
             if(!email_verified){
