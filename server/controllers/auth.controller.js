@@ -98,11 +98,7 @@ const login = catchAsync(async (req, res, next) => {
 
 const logout = catchAsync(async (req, res) => { // ვქმნით logout ფუნქციას, რომელსაც გადავცემთ req, res ობიექტებს, catchAsync - ს ვიყენებთ ჩვენ იმისათვის, 
     // რომ დავიჭიროთ ასინქრონული error - ები
-    res.clearCookie('lg', {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'prod',
-        sameSite: 'None'
-    }); // res ობიექტს გააჩნია ერთი მეთოდი სახელად clearCookie რომელიც გადაცემული სახელით წაშლის token - ს cookie - ს სექციიდან
+    res.clearCookie('lg'); // res ობიექტს გააჩნია ერთი მეთოდი სახელად clearCookie რომელიც გადაცემული სახელით წაშლის token - ს cookie - ს სექციიდან
 
     res.status(200).send(); // მომხმარებელს ვუბრუნებთ პასუხს statusCode - ით 200
 });
