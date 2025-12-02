@@ -27,9 +27,9 @@ const SignUp = () => {
                     <h1 className="mb-5">Signup Page</h1>
 
                     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-                        <input type="text" name="fullname" value={formData.fullname} placeholder="Enter Fullname" onChange={handleChange} className="w-200 border p-2" required />
-                        <input type="email" name="email" value={formData.email} placeholder="Email" onChange={handleChange} className="w-200 border p-2" required />
-                        <input type="password" name="password" value={formData.password} onChange={handleChange} className="w-200 border p-2" placeholder="Enter Password" required />
+                        <input type="text" name="fullname" value={formData.fullname} placeholder="Enter Fullname" onChange={handleChange} className="lg:w-200 md:w-150 sm:w-150 w-75 border p-2" required />
+                        <input type="email" name="email" value={formData.email} placeholder="Email" onChange={handleChange} className="lg:w-200 md:w-150 sm:w-150 w-75 border p-2" required />
+                        <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Enter Password" className="lg:w-200 md:w-150 sm:w-150 w-75 border p-2" required />
                         <button className="text-white p-2 font-medium mb-3" style={{backgroundColor: 'var(--button-color, #7462AB)'}}>Submit</button>
                     </form>
 

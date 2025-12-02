@@ -4,7 +4,7 @@ const Footer = memo(() => {
     return (
         <div>
             <img src='https://afritechcomputerske.com/assets/banner-main-1-BicStc4u.jpg' className='w-full h-40 object-cover' />
-            <div className='flex gap-30 justify-center p-15'>
+            <div className='lg:flex lg:flex-row md:flex md:flex-wrap lg:gap-30 md:gap-15 sm:flex sm:flex-wrap sm:gap-10 flex flex-wrap gap-10 lg:justify-center p-15'>
                 <div className='font-extralight'>
                     <p className='text-xl font-normal'>About Our Team</p>
                     <p>Our Company</p>

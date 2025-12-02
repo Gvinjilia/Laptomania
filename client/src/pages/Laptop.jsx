@@ -25,7 +25,7 @@ const Laptop = ({ laptop }) => {
     };
 
     return (
-        <div className="bg-white rounded-lg shadow p-4 flex flex-col w-95 min-h-158">
+        <div className="bg-white rounded-lg shadow p-4 flex flex-col lg:w-95 md:w-95 sm:90 w-85 min-h-158">
             {/* images */}
             <div className="grid grid-cols-2 mb-4 w-70">
                 {laptop.images.map((image) => (
@@ -54,7 +54,7 @@ const Laptop = ({ laptop }) => {
                 </form>
             ) : (
                 <>
-                    <div className="w-90 flex flex-col gap-5 mb-5">
+                    <div className="lg:w-90 md:w-90 sm:w-80 w-70 flex flex-col gap-5 mb-5">
                         <h2>{laptop.brand} - {laptop.model}</h2>
                         <p>Processor: {laptop.processor}</p>
                         <p>RAM/Storage: {laptop.ram}/{laptop.storage}</p>

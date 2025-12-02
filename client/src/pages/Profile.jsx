@@ -27,11 +27,11 @@ const Profile = () => {
         <>
             <div className='relative mb-20'>
                 <img src={background} />
-                <div className='absolute top-40 right-60'>
+                <div className='absolute top-40 right-60 lg:block md:hidden sm:hidden hidden'>
                     <p className='text-white text-5xl font-black mb-10'>Lorem ipsum dolor <br /> adipisicing elit.</p>
                     <button className='text-white border p-2 w-30 text-[15px] mb-10'>VIEW MORE</button>
 
-                    <div className='flex flex-col gap-5'>
+                    <div className='lg:flex lg:flex-col lg:gap-5'>
                         <div className='flex gap-3 items-center'>
                             <img src={call} className='w-5' />
                             <p className='text-white'>Contact Us: +597 123 456 78</p>
@@ -47,7 +47,7 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
-            <div className="pl-20">
+            <div className="lg:pl-20 md:pl-10 sm:pl-5 pl-5">
                 <div className="border w-20 h-20 rounded-full flex justify-center items-center">
                     {
                         user.avatar ? (
@@ -58,11 +58,11 @@ const Profile = () => {
                     }
                 </div>
                 <p className="mb-5 mt-5">SIGNED IN AS: {user.email}</p>
-                <p className="mb-10">ROLE: {user.role}</p>
+                <p className="lg:mb-10 md:mb-5 sm:mb-5 mb-5">ROLE: {user.role}</p>
             </div>
 
             {(user.role === 'admin' || user.role === 'moderator') && (
-                <div className="pl-20">
+                <div className="lg:pl-20 md:pl-10 sm:pl-5 pl-5">
                     <AddLaptop />
                     <LaptopList />
                 </div>

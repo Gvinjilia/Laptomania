@@ -9,9 +9,9 @@ const Products = () => {
         <main>
             <div>
                 <div className="relative mb-10">
-                    <img src='https://afritechcomputerske.com/assets/banner-main-1-BicStc4u.jpg' className='h-150 w-full' />
+                    <img src='https://afritechcomputerske.com/assets/banner-main-1-BicStc4u.jpg' className='w-full' />
 
-                    <div className='absolute top-40 right-60'>
+                    <div className='absolute top-40 right-60 lg:block md:hidden sm:hidden hidden'>
                         <p className='text-white text-5xl font-black mb-10'>Lorem ipsum dolor <br /> adipisicing elit.</p>
                         <button className='text-white border p-2 w-30 text-[15px] mb-10'>VIEW MORE</button>
 

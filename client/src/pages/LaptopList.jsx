@@ -9,7 +9,7 @@ const LaptopList = () => {
     }
 
     return (
-        <section className="flex flex-wrap justify-center items-start gap-5 mb-10">
+        <section className="flex flex-wrap justify-center items-start gap-5 mb-10 lg:pt-0 md:pt-5 sm:pt-5 pt-5">
             {laptops.map((laptop) => {
                 return <Laptop key={laptop._id} laptop={laptop} />;
             })}

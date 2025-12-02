@@ -2,6 +2,8 @@ import { Link } from "react-router";
 import { useAuth } from "../../context/AuthContext";
 
 import logo from '../../images/logo.png';
+import menuImg from '../../images/menu (1).png';
+import closeImg from '../../images/close.png';
 import { useState } from "react";
 import { useLaptop } from "../../context/LaptopContext";
 
@@ -9,39 +11,60 @@ const Nav = () => {
     const { user, logout } = useAuth();
     const { cart, reduceByOne, addToCart, deleteProduct, clearCart } = useLaptop();
     const [isOpen, setIsOpen] = useState(false);
+    const [menu, setMenu] = useState(false);
 
     return (
         <>
-            <header className="flex justify-center items-center p-5">
+            <header className="lg:flex lg:justify-center p-5">
                 <nav>
-                    <ul className="flex gap-15">
-                        <div className="mr-50">
+                    <ul className="lg:flex lg:flex-row md:flex md:flex-col sm:flex sm:flex-col">
+                        <div className="mr-50 flex justify-between items-center w-full mb-2">
                             <img src={logo} className="w-40" />
+                            <div className="lg:hidden md:flex md:flex-row md:justify-center md:items-center md:gap-10 sm:flex sm:flex-row sm:justify-center sm:items-center sm:gap-10 flex flex-row gap-10 justify-center items-center">
+                                <div className={`relative ${user ? 'block' : 'hidden'}`}>
+                                    <li onClick={() => setIsOpen(true)}>Cart</li>
+                                    {
+                                        cart.length > 0 && (
+                                            <p className="absolute top-[-15px] right-[-15px] bg-red-400 w-5 h-5 flex justify-center items-center rounded-full text-white text-[13px]">{cart.reduce((acc, curValue) => acc + curValue.quantity, 0)}</p>
+                                        )
+                                    }
+                                </div>
+                                {
+                                    menu ? (
+                                        <img src={closeImg} onClick={() => setMenu((prev) => !prev)} className="w-4 h-4" />
+                                    ) : (
+                                        <img src={menuImg} onClick={() => setMenu((prev) => !prev)} className="w-7" />
+                                    )
+                                }
+                            </div>
                         </div>
-                        <li><Link to='/'>Home</Link></li>
-                        {
-                            user ? (
-                                <>
-                                    <div className="relative">
-                                        <li onClick={() => setIsOpen(true)}>Cart</li>
-                                        {
-                                            cart.length > 0 && (
-                                                <p className="absolute top-[-15px] right-[-15px] bg-red-400 w-5 h-5 flex justify-center items-center rounded-full text-white text-[13px]">{cart.reduce((acc, curValue) => acc + curValue.quantity, 0)}</p>
-                                            )
-                                        }
-                                    </div>
-
-                                    <li><Link to='/profile'>Profile</Link></li>
-                                    <li><Link to='/laptops'>Laptops</Link></li>
-                                    <li><Link onClick={logout} to='/login'>Logout</Link></li>
-                                </>
-                            ) : (
-                                <>
-                                    <li><Link to='/signup'>Signup</Link></li>
-                                    <li><Link to='/login'>Login</Link></li>
-                                </>
-                            )
-                        }
+                        <div>
+                            <div className={`lg:flex gap-15 md:${menu ? 'block' : 'hidden'} sm:${menu ? 'block' : 'hidden'} ${menu ? 'block' : 'hidden'} pr-8`}>
+                                {
+                                    user ? (
+                                        <>
+                                            <li><Link to='/'>Home</Link></li>
+                                            <div className="relative lg:block md:hidden sm:hidden hidden">
+                                                <li onClick={() => setIsOpen(true)}>Cart</li>
+                                                {
+                                                    cart.length > 0 && (
+                                                        <p className="absolute top-[-15px] right-[-15px] bg-red-400 w-5 h-5 flex justify-center items-center rounded-full text-white text-[13px]">{cart.reduce((acc, curValue) => acc + curValue.quantity, 0)}</p>
+                                                    )
+                                                }
+                                            </div>
+                                            <li><Link to='/profile'>Profile</Link></li>
+                                            <li><Link to='/laptops'>Laptops</Link></li>
+                                            <li className="lg:border-none lg:text-start lg:p-0 lg:rounded-none lg:mt-0 md:border md:text-center md:p-1 md:rounded-xs md:mt-2 sm:border sm:text-center sm:p-1 sm:rounded-xs sm:mt-2 mt-2 border text-center p-1 rounded-xs w-full"><Link onClick={logout} to='/login'>Logout</Link></li>
+                                        </>
+                                    ) : (
+                                        <div className="lg:flex lg:flex-row lg:gap-15 md:flex md:flex-col sm:flex sm:flex-col flex flex-col gap-2">
+                                            <li className="lg:border-none lg:text-start lg:p-0 lg:rounded-none lg:mt-0 md:border md:text-center md:p-1 md:rounded-xs md:mt-2 sm:border sm:text-center sm:p-1 sm:rounded-xs sm:mt-2 border text-center p-1 rounded-xs"><Link to='/signup'>Signup</Link></li>
+                                            <li className="lg:border-none lg:text-start lg:p-0 lg:rounded-none lg:mt-0 md:border md:text-center md:p-1 md:rounded-xs md:mt-2 sm:border sm:text-center sm:p-1 sm:rounded-xs sm:mt-2 border text-center p-1 rounded-xs"><Link to='/login'>Login</Link></li>
+                                        </div>
+                                    )
+                                }
+                            </div>
+                        </div>
                     </ul>
                 </nav>
 
