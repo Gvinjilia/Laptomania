@@ -14,7 +14,7 @@ const createSendToken = (user, res) => {
     const token = user.signToken();
 
     const cookieOptions = {
-        httpOnly: false, 
+        httpOnly: true, 
         secure: process.env.NODE_ENV === 'prod',
         sameSite: 'None',
         maxAge: process.env.COOKIE_EXPIRES * 24 * 60 * 60 * 1000
